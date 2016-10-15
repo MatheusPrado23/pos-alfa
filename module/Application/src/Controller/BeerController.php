@@ -4,25 +4,24 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class BeerController extends AbstractActionController
-{
+class BeerController extends AbstractActionController {
     public $tableGateway;
     public $cache;
 
-    public function __construct($tableGateway, $cache)
+    public function __construct($tableGateway, $cache = null)
     {
         $this->tableGateway = $tableGateway;
-        $this->cache = $cache;
+        //$this->cache = $cache;
     }
 
     public function indexAction()
     {
         $key = 'CachedBeers';
-        $beers = $this->cache->getItem($key, $success);
-        if (! $success) {
+        //$beers = $this->cache->getItem($key, $success);
+       // if (! $success) {
             $beers = $this->tableGateway->select()->toArray();
-            $this->cache->setItem($key, $beers);
-        }
+        //    $this->cache->setItem($key, $beers);
+       // }
 
         return new ViewModel(['beers' => $beers]);
     }
@@ -60,7 +59,7 @@ class BeerController extends AbstractActionController
                 unset($data['send']);
                 /* salva a cerveja*/
                 $this->tableGateway->insert($data);
-                $this->cache->removeItem('CachedBeers');
+                //$this->cache->removeItem('CachedBeers');
                 /* redireciona para a página inicial que mostra todas as cervejas*/
                 return $this->redirect()->toUrl('/beer');
             }
@@ -103,7 +102,7 @@ class BeerController extends AbstractActionController
             unset($data['send']);
             /* salva a cerveja*/
             $this->tableGateway->update($data, 'id = '.$data['id']);
-            $this->cache->removeItem('CachedBeers');
+            //$this->cache->removeItem('CachedBeers');
             /* redireciona para a página inicial que mostra todas as cervejas*/
             return $this->redirect()->toUrl('/beer');
         }
@@ -134,7 +133,7 @@ class BeerController extends AbstractActionController
         }
 
         $this->tableGateway->delete(['id' => $id]);
-        $this->cache->removeItem('CachedBeers');
+        //$this->cache->removeItem('CachedBeers');
         // return $this->redirect()->toUrl('/beer');
         return $this->redirect()->toRoute('beer');
     }

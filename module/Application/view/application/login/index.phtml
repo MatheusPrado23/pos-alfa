@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Trabalho ZF3</title>
+        <!-- Bootstrap core CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/login.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+
+            <?php
+            echo $this->form()->openTag($form->setAttribute('class', 'form-signin'));
+            ?>
+            <div class="page-header">
+                <h1 style="text-align: center;">Trabalho ZF3    </h1>
+            </div>
+            
+
+            <?php
+            echo $this->formRow($form->get('usuario')
+                            ->setAttribute('class', 'form-control col-lg-12')
+                            ->setAttribute('placeholder', 'Usuário')
+            );
+            ?>         
+            <?php
+            echo $this->formRow($form->get('senha')
+                            ->setAttribute('class', 'form-control col-lg-12')
+                            ->setAttribute('placeholder', 'Senha')
+            );
+            ?>
+            <?php echo $this->formElement($form->get('send')->setAttribute('class', 'btn btn-primary btn-lg btn-block')) ?><br>
+            <?php
+            if (isset($this->error)) :
+                ?>        
+                <div class="alert alert-danger alert-dismissable">
+                    <p style="text-align: center;"><?php echo $this->error; ?></p>
+                </div>
+                <?php
+            endif;
+            ?>
+            <div class="alert"> 
+                <p>User: admin<br> Pass: admin</p>
+            </div>
+            
+            <div class="alert alert-danger"> 
+                <p style="text-align: center;"><strong>Alunos:</strong></p>
+                <p>
+                Nícolas Binatti<br>
+                Matheus Prado<br>
+                Renan Zanelato<br>
+                Lucas Manara</p>
+            </div>
+<?php echo $this->form()->closeTag() ?>
+
+        </div>
+    </body>
+</html>
